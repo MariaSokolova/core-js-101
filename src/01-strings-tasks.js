@@ -202,8 +202,39 @@ function extractEmails(str) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleString(width, height) {
+  let str = '';
+  for (let i = 1; i <= height; i++) {
+    for (let j = 1; j <= width; j++) {
+      if (i === 1) {
+        if (j === 1) {
+          str += '┌';
+        } else if (j === width) {
+          str += '┐';
+        } else {
+          str += '─';
+        }
+      } else if (i === height) {
+        if (j === 1) {
+          str += '└';
+        } else if (j === width) {
+          str += '┘';
+        } else {
+          str += '─';
+        }
+      } else {
+        if (j === 1 || j === width) {
+          str += '│';
+        } else {
+          str += ' ';
+        }
+      }
+
+    }
+    str += '\n';
+  }
+  return str;
+
 }
 
 
@@ -223,8 +254,21 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  const cipher = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
+  let result = '';
+
+  for (let i = 0; i < str.length; i++) {
+    let index = alphabet.indexOf(str.charAt(i));
+    if(index === -1) {
+      result += str.charAt(i);
+    } else {
+      result += cipher.charAt(index);
+    }
+  }
+  return result;
 }
 
 /**
@@ -240,8 +284,8 @@ function encodeToRot13(/* str */) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  throw new Error('Not implemented');
+function isString(value) {
+  return  (typeof value === 'string' || value instanceof String);
 }
 
 
@@ -269,8 +313,32 @@ function isString(/* value */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const first = {
+    A: 0,
+    2: 1,
+    3: 2,
+    4: 3,
+    5: 4,
+    6: 5,
+    7: 6,
+    8: 7,
+    9: 8,
+    10: 9,
+    J: 10,
+    Q: 11,
+    K: 12,
+  };
+
+  const second = {
+    '♣': 0,
+    '♦': 1,
+    '♥': 2,
+    '♠': 3
+  };
+  const firstEl = value.slice(0, -1);
+  const secondEl = value.slice(-1);
+  return  first[firstEl] + second[secondEl] * 13;
 }
 
 
