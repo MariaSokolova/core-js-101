@@ -111,8 +111,20 @@ return `${hours}:${minutes}:${seconds}.${ms}`;
  *    Date.UTC(2016,3,5,18, 0) => Math.PI
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
-function angleBetweenClockHands(/* date */) {
-  throw new Error('Not implemented');
+function angleBetweenClockHands(date) {
+  const aaa = new Date(date);
+  const hours = (aaa.getUTCHours() % 12);
+  const minutes = aaa.getUTCMinutes();
+
+  const angleHour = 0.5 * (60 * hours + minutes);
+  const angleMinutes = 6 * minutes;
+  let angle = (Math.abs(angleHour - angleMinutes));
+    angle = angle > 180 ? angle - 180 : angle;
+   const result = angle * Math.PI / 180;
+  return result;
+
+
+
 }
 
 
