@@ -81,18 +81,17 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-  let delta_ms = (new Date(endDate).getTime() - new Date(startDate).getTime());
-  console.log('delta_ms', delta_ms);
-  const ms = (delta_ms % 1000).toLocaleString(undefined, {minimumIntegerDigits: 3});
+  let deltaMs = (new Date(endDate).getTime() - new Date(startDate).getTime());
 
-  delta_ms = delta_ms / 1000;
-  const seconds = Math.floor(delta_ms % 60).toLocaleString(undefined, {minimumIntegerDigits: 2});
-  delta_ms = delta_ms / 60;
-  const minutes = Math.floor(delta_ms % 60).toLocaleString(undefined, {minimumIntegerDigits: 2});
-  delta_ms = delta_ms / 60;
-  const hours = Math.floor(delta_ms % 24).toLocaleString(undefined, {minimumIntegerDigits: 2});
+  const ms = (deltaMs % 1000).toLocaleString(undefined, {minimumIntegerDigits: 3});
+  deltaMs = deltaMs / 1000;
+  const seconds = Math.floor(deltaMs % 60).toLocaleString(undefined, {minimumIntegerDigits: 2});
+  deltaMs = deltaMs / 60;
+  const minutes = Math.floor(deltaMs % 60).toLocaleString(undefined, {minimumIntegerDigits: 2});
+  deltaMs = deltaMs / 60;
+  const hours = Math.floor(deltaMs % 24).toLocaleString(undefined, {minimumIntegerDigits: 2});
 
-return `${hours}:${minutes}:${seconds}.${ms}`;
+  return `${hours}:${minutes}:${seconds}.${ms}`;
 }
 
 /**
@@ -115,16 +114,11 @@ function angleBetweenClockHands(date) {
   const aaa = new Date(date);
   const hours = (aaa.getUTCHours() % 12);
   const minutes = aaa.getUTCMinutes();
-
   const angleHour = 0.5 * (60 * hours + minutes);
   const angleMinutes = 6 * minutes;
   let angle = (Math.abs(angleHour - angleMinutes));
     angle = angle > 180 ? angle - 180 : angle;
-   const result = angle * Math.PI / 180;
-  return result;
-
-
-
+  return angle * Math.PI / 180;
 }
 
 
