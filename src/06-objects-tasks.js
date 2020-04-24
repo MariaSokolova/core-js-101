@@ -20,8 +20,15 @@
  *    console.log(r.height);      // => 20
  *    console.log(r.getArea());   // => 200
  */
-function Rectangle(/* width, height */) {
-  throw new Error('Not implemented');
+function Rectangle(width, height) {
+  const result = {
+    width,
+    height,
+    getArea() {
+      return this.width * this.height;
+    }
+  };
+  return result;
 }
 
 
@@ -35,8 +42,8 @@ function Rectangle(/* width, height */) {
  *    [1,2,3]   =>  '[1,2,3]'
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
-function getJSON(/* obj */) {
-  throw new Error('Not implemented');
+function getJSON(obj) {
+  return JSON.stringify(obj);
 }
 
 
@@ -51,8 +58,10 @@ function getJSON(/* obj */) {
  *    const r = fromJSON(Circle.prototype, '{"radius":10}');
  *
  */
-function fromJSON(/* proto, json */) {
-  throw new Error('Not implemented');
+function fromJSON(proto, json) {
+  const a = JSON.parse(json);
+  a.__proto__ = proto;
+  return a;
 }
 
 
@@ -111,33 +120,104 @@ function fromJSON(/* proto, json */) {
  */
 
 const cssSelectorBuilder = {
-  element(/* value */) {
-    throw new Error('Not implemented');
+  idAttribute: undefined,
+  tag: undefined,
+  classes: [],
+  href: undefined,
+  pseudoCl: [],
+  pseudoEl: undefined,
+  combinator: undefined,
+  selector2: undefined,
+  selector1: undefined,
+
+  element(value) {
+    this.tag = value;
+    return this;
   },
 
-  id(/* value */) {
-    throw new Error('Not implemented');
+  id(value) {
+    this.idAttribute = value;
+    return this;
   },
 
-  class(/* value */) {
-    throw new Error('Not implemented');
+  class(value) {
+    this.classes.push(value);
+    return this;
   },
 
-  attr(/* value */) {
-    throw new Error('Not implemented');
+  attr(value) {
+    this.href = value;
+    return this;
   },
 
-  pseudoClass(/* value */) {
-    throw new Error('Not implemented');
+  pseudoClass(value) {
+    this.pseudoCl.push(value);
+    return this;
   },
 
-  pseudoElement(/* value */) {
-    throw new Error('Not implemented');
+  pseudoElement(value) {
+    this.pseudoEl = value;
+    return this;
   },
 
-  combine(/* selector1, combinator, selector2 */) {
-    throw new Error('Not implemented');
+  combine(selector1, combinator, selector2) {
+    this.selector1 = selector1;
+    this.selector2 = selector2;
+    this.combinator = combinator;
+
+
+    return this;
   },
+
+  reset() {
+    this.idAttribute = undefined;
+    this.tag = undefined;
+    this.classes = [];
+    this.href = undefined;
+    this.pseudoCl = [];
+    this.pseudoEl = undefined;
+    this.combinator = undefined;
+    this.selector2 = undefined;
+    this.selector1 = undefined;
+  },
+
+  stringify() {
+    let result = '';
+
+    if (this.tag) {
+      result += `${this.tag}`;
+    }
+
+    if (this.href) {
+      result += `[${this.href}]`;
+    }
+
+    if (this.idAttribute) {
+      result += `#${this.idAttribute}`;
+    }
+
+    if (this.classes.length !== 0) {
+      this.classes.forEach((el) => result += `.${el}`)
+    }
+
+    if (this.pseudoCl.length !== 0) {
+      this.pseudoCl.forEach((el) => result += `:${el}`)
+    }
+
+    if (this.pseudoEl) {
+      result += `::${this.pseudoEl}`;
+    }
+
+    if (this.selector1) {
+      // result += this.selector1.stringify() + ' ' + this.combinator + ' ' + this.selector2.stringify()
+    }
+
+    this.reset();
+
+    return result;
+  }
+
+
 };
 
 
