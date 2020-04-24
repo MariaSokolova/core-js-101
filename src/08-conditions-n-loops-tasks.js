@@ -562,14 +562,14 @@ function evaluateTicTacToePosition(position) {
     return position[0][2];
   }
 
-  for (let i = 0; i < position.length; i += 1) {
+  for (let i = 0; i < 3; i++) {
     if (typeof position[i][0] === 'string' && position[i][0] === position[i][1]
       && position[i][1] === position[i][2]) {
       return position[i][0];
     }
   }
 
-  for (let i = 0; i < position.length; i += 1) {
+  for (let i = 0; i < 3; i++) {
     if (typeof position[0][i] === 'string' && position[0][i] === position[1][i]
       && position[0][i] === position[2][i]){
       return position[0][i];
