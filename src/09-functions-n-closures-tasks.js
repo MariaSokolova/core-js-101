@@ -65,7 +65,7 @@ function getPolynom(...num) {
   const arr = num.reverse();
   return (x) => {
     let result = 0;
-    for (let i = 0; i < arr.length; i++) {
+    for (let i = 0; i < arr.length; i += 1) {
       result += arr[i] * x ** i;
     }
     return result;
@@ -101,7 +101,7 @@ function memoize(/* func */) {
  *
  * @example
  * const attempt = 0, retryer = retry(() => {
- *      if (++attempt % 2) throw new Error('test');
+ *      if ( += 1attempt % 2) throw new Error('test');
  *      else return attempt;
  * }, 2);
  * retryer() => 2

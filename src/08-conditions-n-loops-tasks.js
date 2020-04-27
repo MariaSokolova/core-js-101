@@ -326,7 +326,7 @@ function isCreditCardNumber(ccn) {
   const ccnStr = (`${ccn}`).split('').map((el) => Number(el));
   const arr = [];
 
-  for (let i = 0; i < ccnStr.length; i++) {
+  for (let i = 0; i < ccnStr.length; i += 1) {
     if (ccnStr.length % 2 === 0) {
       if (i % 2 === 0) {
         ccnStr[i] *= 2;
@@ -408,7 +408,7 @@ function isBracketsBalanced(str) {
   };
 
   const stack = [];
-  for (let i = 0; i < str.length; i++) {
+  for (let i = 0; i < str.length; i += 1) {
     const ch = str.charAt(i);
     if (openBr.includes(ch)) {
       stack.push(ch);
@@ -467,8 +467,8 @@ function getCommonDirectoryPath(pathes) {
   const arr = pathes.map((el) => el.split('/'));
   let str = '';
 
-  for (let i = 0; i < arr[0].length; i++) {
-    for (let j = 1; j < arr.length; j++) {
+  for (let i = 0; i < arr[0].length; i += 1) {
+    for (let j = 1; j < arr.length; j += 1) {
       if (arr[0][i] !== arr[j][i]) {
         return str;
       }
@@ -507,13 +507,13 @@ function getMatrixProduct(m1, m2) {
     return false;
   }
 
-  for (let i = 0; i < rowsM1; i++) {
+  for (let i = 0; i < rowsM1; i += 1) {
     m3[i] = [];
   }
-  for (let j = 0; j < colsM2; j++) {
-    for (let i = 0; i < rowsM1; i++) {
+  for (let j = 0; j < colsM2; j += 1) {
+    for (let i = 0; i < rowsM1; i += 1) {
       let t = 0;
-      for (let k = 0; k < rowsM2; k++) {
+      for (let k = 0; k < rowsM2; k += 1) {
         t += m1[i][k] * m2[k][j];
       }
       m3[i][j] = t;
@@ -564,14 +564,14 @@ function evaluateTicTacToePosition(position) {
     return position[0][2];
   }
 
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 3; i += 1) {
     if (typeof position[i][0] === 'string' && position[i][0] === position[i][1]
       && position[i][1] === position[i][2]) {
       return position[i][0];
     }
   }
 
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 3; i += 1) {
     if (typeof position[0][i] === 'string' && position[0][i] === position[1][i]
       && position[0][i] === position[2][i]) {
       return position[0][i];

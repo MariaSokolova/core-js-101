@@ -37,7 +37,7 @@ function findElement(arr, value) {
  */
 function generateOdds(len) {
   const arr = [];
-  for (let i = 1; i < (len * 2); i++) {
+  for (let i = 1; i < (len * 2); i += 1) {
     if (i % 2 !== 0) {
       arr.push(i);
     }
@@ -91,7 +91,7 @@ function getArrayOfPositives(arr) {
  */
 function getArrayOfStrings(arr) {
   const newArr = [];
-  for (let i = 0; i < arr.length; i++) {
+  for (let i = 0; i < arr.length; i += 1) {
     if (typeof arr[i] === 'string') {
       newArr.push(arr[i]);
     }
@@ -114,7 +114,7 @@ function getArrayOfStrings(arr) {
  */
 function removeFalsyValues(arr) {
   // let newArr = [];
-  // for (let i = 0; i < arr.length; i++) {
+  // for (let i = 0; i < arr.length; i += 1) {
   //   if (typeof arr[i] === 'number' && arr[i] > 0) {
   //     newArr.push(arr[i]);
   //   } else if (typeof arr[i] === 'string' && arr[i].length > 0) {
@@ -260,7 +260,7 @@ function toArrayOfSquares(arr) {
  */
 function getMovingSum(arr) {
   const newArr = [arr[0]];
-  for (let i = 1; i < arr.length; i++) {
+  for (let i = 1; i < arr.length; i += 1) {
     newArr.push(arr[i] + newArr[i - 1]);
   }
   return newArr;
@@ -304,8 +304,8 @@ function propagateItemsByPositionIndex(arr) {
     return [];
   }
   const newArr = [];
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j <= i; j++) {
+  for (let i = 0; i < arr.length; i += 1) {
+    for (let j = 0; j <= i; j += 1) {
       newArr.push(arr[i]);
     }
   }
@@ -499,9 +499,9 @@ function sortCitiesArray(arr) {
  */
 function getIdentityMatrix(n) {
   const result = [];
-  for (let i = 0; i < n; i++) {
+  for (let i = 0; i < n; i += 1) {
     result[i] = [];
-    for (let j = 0; j < n; j++) {
+    for (let j = 0; j < n; j += 1) {
       // if (i === j) {
       //   result[i].push(1);
       // } else {
@@ -530,7 +530,7 @@ function getIdentityMatrix(n) {
  */
 function getIntervalArray(start, end) {
   const arr = [];
-  for (let i = start; i <= end; i++) {
+  for (let i = start; i <= end; i += 1) {
     arr.push(i);
   }
   return arr;
@@ -658,7 +658,7 @@ function swapHeadAndTail(ar) {
   const arr = [...ar];
   const n = Math.floor(arr.length / 2);
   const delta = arr.length % 2;
-  for (let i = 0; i < n; i++) {
+  for (let i = 0; i < n; i += 1) {
     const temp = arr[i];
     arr[i] = arr[i + n + delta];
     arr[i + n + delta] = temp;
