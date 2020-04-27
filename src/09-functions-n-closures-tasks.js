@@ -23,10 +23,11 @@
  *   getComposition(Math.sin, Math.asin)(x) => Math.sin(Math.asin(x))
  *
  */
-function getComposition(/* f, g */) {
-  throw new Error('Not implemented');
+function getComposition(f, g) {
+  return function (x) {
+    return f(g(x));
+  }
 }
-
 
 /**
  * Returns the math power function with the specified exponent
@@ -44,8 +45,10 @@ function getComposition(/* f, g */) {
  *   power05(16) => 4
  *
  */
-function getPowerFunction(/* exponent */) {
-  throw new Error('Not implemented');
+function getPowerFunction(exponent) {
+  return function (x) {
+    return Math.pow(x, exponent);
+  }
 }
 
 
@@ -62,11 +65,17 @@ function getPowerFunction(/* exponent */) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom() {
-  throw new Error('Not implemented');
+function getPolynom(...num) {
+  let arr = num.reverse();
+  return function (x) {
+    let result = 0;
+    for (let i = 0; i < arr.length; i++) {
+      result = result + arr[i] * Math.pow(x, i)
+    }
+    console.log(result);
+    return result;
+  }
 }
-
-
 /**
  * Memoizes passed function and returns function
  * which invoked first time calls the passed function and then always returns cached result.

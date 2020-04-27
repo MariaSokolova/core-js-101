@@ -28,18 +28,18 @@
  *
  */
 function getFizzBuzz(num) {
-
+  let result;
   if (num % 5 === 0 && num % 3 === 0) {
-    return 'FizzBuzz';
+    result = 'FizzBuzz';
   } else if (num % 3 === 0) {
-    return 'Fizz';
-
+    result = 'Fizz';
   } else if (num % 5 === 0) {
-    return 'Buzz';
+    result = 'Buzz';
+  } else {
+    result = num;
   }
-  return num;
+  return result;
 }
-
 
 /**
  * Returns the factorial of the specified integer n.
@@ -74,7 +74,7 @@ function getFactorial(n) {
  */
 function getSumBetweenNumbers(n1, n2) {
   let sum = n1;
-  for (let i = n1; i < n2; i++) {
+  for (let i = n1; i < n2; i += 1) {
     sum = sum + i + 1;
   }
   return sum;
@@ -134,21 +134,23 @@ function isTriangle(a, b, c) {
  *
  */
 function doRectanglesOverlap(rect1, rect2) {
-  rect1.x1 = rect1.left;
-  rect1.x2 = rect1.left + rect1.width;
-  rect1.y1 = rect1.top;
-  rect1.y2 = rect1.top + rect1.height;
+  const rec1 = {};
+  const rec2 = {};
+  rec1.x1 = rect1.left;
+  rec1.x2 = rect1.left + rect1.width;
+  rec1.y1 = rect1.top;
+  rec1.y2 = rect1.top + rect1.height;
 
-  rect2.x1 = rect2.left;
-  rect2.x2 = rect2.left + rect2.width;
-  rect2.y1 = rect2.top;
-  rect2.y2 = rect2.top + rect2.height;
+  rec2.x1 = rect2.left;
+  rec2.x2 = rect2.left + rect2.width;
+  rec2.y1 = rect2.top;
+  rec2.y2 = rect2.top + rect2.height;
 
 
-  if (rect1.x1 >= rect2.x2 || rect2.x1 >= rect1.x2) {
+  if (rec1.x1 >= rec2.x2 || rec2.x1 >= rec1.x2) {
     return false;
   }
-  if (rect1.y1 >= rect2.y2 || rect2.y1 >= rect1.y2) {
+  if (rec1.y1 >= rec2.y2 || rec2.y1 >= rec1.y2) {
     return false;
   }
   return true;
@@ -182,7 +184,8 @@ function doRectanglesOverlap(rect1, rect2) {
  *
  */
 function isInsideCircle(circle, point) {
-  const destination = (point.x - circle.center.x) * (point.x - circle.center.x) + (point.y - circle.center.y) * (point.y - circle.center.y);
+  const destination = (point.x - circle.center.x) * (point.x - circle.center.x)
+    + (point.y - circle.center.y) * (point.y - circle.center.y);
   return (destination < circle.radius * circle.radius);
 }
 
@@ -202,17 +205,17 @@ function findFirstSingleChar(str) {
   const map = {};
 
   const arrStr = str.split('');
-  arrStr.forEach(el => {
+  arrStr.forEach((el) => {
     let value = map[el];
     if (map[el] === undefined) {
       value = 1;
     } else {
-      value = value + 1;
+      value += 1;
     }
     map[el] = value;
   });
 
-  for (let i = 0; i < arrStr.length; i++) {
+  for (let i = 0; i < arrStr.length; i += 1) {
     if (map[arrStr[i]] === 1) {
       return arrStr[i];
     }
@@ -244,8 +247,8 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-  let arr = [a, b];
-  arr.sort((a, b) => a - b);
+  const arr = [a, b];
+  arr.sort((x, y) => x - y);
   let first;
   let end;
 
@@ -294,8 +297,8 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-  num = num + '';
-  return Number(num.split('').reverse().join(''));
+  const str = num.toString();
+  return Number(str.split('').reverse().join(''));
 }
 
 
@@ -571,7 +574,7 @@ function evaluateTicTacToePosition(position) {
 
   for (let i = 0; i < 3; i++) {
     if (typeof position[0][i] === 'string' && position[0][i] === position[1][i]
-      && position[0][i] === position[2][i]){
+      && position[0][i] === position[2][i]) {
       return position[0][i];
     }
   }
