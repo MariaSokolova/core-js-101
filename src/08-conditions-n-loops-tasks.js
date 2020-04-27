@@ -323,7 +323,7 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-  const ccnStr = (`${ccn}`).split('');
+  const ccnStr = (`${ccn}`).split('').map((el) => Number(el));
   const arr = [];
 
   for (let i = 0; i < ccnStr.length; i++) {
@@ -363,8 +363,8 @@ function isCreditCardNumber(ccn) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(num) {
-  const sum = (`${num}`).split('').reduce((acc, el) => +el + acc, 0);
+function getDigitalRoot(n) {
+  const sum = (`${n}`).split('').reduce((acc, el) => +el + acc, 0);
   if (sum > 9) {
     return getDigitalRoot(sum);
   }
