@@ -308,7 +308,7 @@ function reverseInteger(num) {
  *
  * See algorithm here : https://en.wikipedia.org/wiki/Luhn_algorithm
  *
- * @param {number} cnn
+ * @param {number} ccn
  * @return {boolean}
  *
  * @example:
@@ -323,29 +323,29 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-  ccn = (ccn + '').split('');
-  let arr = [];
+  const ccnStr = (`${ccn}`).split('');
+  const arr = [];
 
-  for (let i = 0; i < ccn.length; i++) {
-    if (ccn.length % 2 === 0) {
+  for (let i = 0; i < ccnStr.length; i++) {
+    if (ccnStr.length % 2 === 0) {
       if (i % 2 === 0) {
-        ccn[i] = ccn[i] * 2;
-        if (ccn[i] > 9) {
-          ccn[i] = 1 + (ccn[i] - 10);
+        ccnStr[i] *= 2;
+        if (ccnStr[i] > 9) {
+          ccnStr[i] = 1 + (ccnStr[i] - 10);
         }
       }
-      arr.push(ccn[i]);
+      arr.push(ccnStr[i]);
     } else {
       if (i % 2 !== 0) {
-        ccn[i] = ccn[i] * 2;
-        if (ccn[i] > 9) {
-          ccn[i] = 1 + (ccn[i] - 10);
+        ccnStr[i] *= 2;
+        if (ccnStr[i] > 9) {
+          ccnStr[i] = 1 + (ccnStr[i] - 10);
         }
       }
-      arr.push(ccn[i]);
+      arr.push(ccnStr[i]);
     }
   }
-  let result = arr.reduce((acc, el) => +el + acc, 0);
+  const result = arr.reduce((acc, el) => +el + acc, 0);
   return (result % 10 === 0 || result % 10 === 7);
 }
 
@@ -364,11 +364,11 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-  let sum = (num + '').split('').reduce((acc, el) => +el + acc, 0);
+  const sum = (`${num}`).split('').reduce((acc, el) => +el + acc, 0);
   if (sum > 9) {
     return getDigitalRoot(sum);
   }
-  return sum
+  return sum;
 }
 
 
@@ -398,16 +398,16 @@ function isBracketsBalanced(str) {
     return true;
   }
 
-  let openBr = '[(<{';
-  let closeBr = '])>}';
-  let pairs = {
+  const openBr = '[(<{';
+  const closeBr = '])>}';
+  const pairs = {
     ']': '[',
     ')': '(',
     '>': '<',
-    '}': '{'
+    '}': '{',
   };
 
-  let stack = [];
+  const stack = [];
   for (let i = 0; i < str.length; i++) {
     const ch = str.charAt(i);
     if (openBr.includes(ch)) {
@@ -464,7 +464,7 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-  const arr = pathes.map(el => el.split('/'));
+  const arr = pathes.map((el) => el.split('/'));
   let str = '';
 
   for (let i = 0; i < arr[0].length; i++) {
@@ -473,7 +473,7 @@ function getCommonDirectoryPath(pathes) {
         return str;
       }
     }
-    str += arr[0][i] + '/';
+    str += `${arr[0][i]}/`;
   }
   return str;
 }
@@ -502,7 +502,7 @@ function getMatrixProduct(m1, m2) {
   const colsM1 = m1[0].length;
   const rowsM2 = m2.length;
   const colsM2 = m2[0].length;
-  let m3 = [];
+  const m3 = [];
   if (colsM1 !== rowsM2) {
     return false;
   }
@@ -554,7 +554,6 @@ function getMatrixProduct(m1, m2) {
  *
  */
 function evaluateTicTacToePosition(position) {
-
   if (typeof position[0][0] === 'string' && position[0][0] === position[1][1]
     && position[1][1] === position[2][2]) {
     return position[0][0];

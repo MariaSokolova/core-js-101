@@ -83,13 +83,13 @@ function isLeapYear(date) {
 function timeSpanToString(startDate, endDate) {
   let deltaMs = (new Date(endDate).getTime() - new Date(startDate).getTime());
 
-  const ms = (deltaMs % 1000).toLocaleString(undefined, {minimumIntegerDigits: 3});
-  deltaMs = deltaMs / 1000;
-  const seconds = Math.floor(deltaMs % 60).toLocaleString(undefined, {minimumIntegerDigits: 2});
-  deltaMs = deltaMs / 60;
-  const minutes = Math.floor(deltaMs % 60).toLocaleString(undefined, {minimumIntegerDigits: 2});
-  deltaMs = deltaMs / 60;
-  const hours = Math.floor(deltaMs % 24).toLocaleString(undefined, {minimumIntegerDigits: 2});
+  const ms = (deltaMs % 1000).toLocaleString(undefined, { minimumIntegerDigits: 3 });
+  deltaMs /= 1000;
+  const seconds = Math.floor(deltaMs % 60).toLocaleString(undefined, { minimumIntegerDigits: 2 });
+  deltaMs /= 60;
+  const minutes = Math.floor(deltaMs % 60).toLocaleString(undefined, { minimumIntegerDigits: 2 });
+  deltaMs /= 60;
+  const hours = Math.floor(deltaMs % 24).toLocaleString(undefined, { minimumIntegerDigits: 2 });
 
   return `${hours}:${minutes}:${seconds}.${ms}`;
 }
@@ -117,8 +117,8 @@ function angleBetweenClockHands(date) {
   const angleHour = 0.5 * (60 * hours + minutes);
   const angleMinutes = 6 * minutes;
   let angle = (Math.abs(angleHour - angleMinutes));
-    angle = angle > 180 ? angle - 180 : angle;
-  return angle * Math.PI / 180;
+  angle = angle > 180 ? angle - 180 : angle;
+  return (angle * Math.PI) / 180;
 }
 
 

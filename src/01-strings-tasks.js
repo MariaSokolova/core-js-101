@@ -222,19 +222,15 @@ function getRectangleString(width, height) {
         } else {
           str += '─';
         }
+      } else if (j === 1 || j === width) {
+        str += '│';
       } else {
-        if (j === 1 || j === width) {
-          str += '│';
-        } else {
-          str += ' ';
-        }
+        str += ' ';
       }
-
     }
     str += '\n';
   }
   return str;
-
 }
 
 
@@ -255,14 +251,13 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
   const cipher = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
   let result = '';
 
   for (let i = 0; i < str.length; i++) {
-    let index = alphabet.indexOf(str.charAt(i));
-    if(index === -1) {
+    const index = alphabet.indexOf(str.charAt(i));
+    if (index === -1) {
       result += str.charAt(i);
     } else {
       result += cipher.charAt(index);
@@ -285,7 +280,7 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-  return  (typeof value === 'string' || value instanceof String);
+  return (typeof value === 'string' || value instanceof String);
 }
 
 
@@ -334,11 +329,11 @@ function getCardId(value) {
     '♣': 0,
     '♦': 1,
     '♥': 2,
-    '♠': 3
+    '♠': 3,
   };
   const firstEl = value.slice(0, -1);
   const secondEl = value.slice(-1);
-  return  first[firstEl] + second[secondEl] * 13;
+  return first[firstEl] + second[secondEl] * 13;
 }
 
 

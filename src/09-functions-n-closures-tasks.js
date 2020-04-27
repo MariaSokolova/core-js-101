@@ -24,9 +24,7 @@
  *
  */
 function getComposition(f, g) {
-  return function (x) {
-    return f(g(x));
-  }
+  return (x) => f(g(x));
 }
 
 /**
@@ -46,9 +44,7 @@ function getComposition(f, g) {
  *
  */
 function getPowerFunction(exponent) {
-  return function (x) {
-    return Math.pow(x, exponent);
-  }
+  return (x) => x ** exponent;
 }
 
 
@@ -66,16 +62,16 @@ function getPowerFunction(exponent) {
  *   getPolynom()      => null
  */
 function getPolynom(...num) {
-  let arr = num.reverse();
-  return function (x) {
+  const arr = num.reverse();
+  return (x) => {
     let result = 0;
     for (let i = 0; i < arr.length; i++) {
-      result = result + arr[i] * Math.pow(x, i)
+      result += arr[i] * x ** i;
     }
-    console.log(result);
     return result;
-  }
+  };
 }
+
 /**
  * Memoizes passed function and returns function
  * which invoked first time calls the passed function and then always returns cached result.

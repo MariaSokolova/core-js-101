@@ -73,7 +73,7 @@ function getAverage(value1, value2) {
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
   const x = x2 - x1;
   const y = y2 - y1;
-  return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+  return Math.sqrt(x ** 2 + y ** 2);
 }
 
 /**
@@ -113,11 +113,9 @@ function getLinearEquationRoot(a, b) {
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
   const xy = x2 * x1 + y1 * y2;
-  const divider = Math.sqrt(Math.pow(x1, 2) + Math.pow(y1, 2)) * Math.sqrt(Math.pow(x2, 2) + Math.pow(y2, 2));
+  const divider = Math.sqrt(x1 ** 2 + y1 ** 2) * Math.sqrt(x2 ** 2 + y2 ** 2);
 
   return Math.acos(xy / divider);
-
-
 }
 
 /**
@@ -166,7 +164,7 @@ function parseNumberFromString(value) {
  *   1,2,3   => 3.741657386773941
  */
 function getParallelipidedDiagonal(a, b, c) {
-  return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2) + Math.pow(c, 2));
+  return Math.sqrt(a ** 2 + b ** 2 + c ** 2);
 }
 
 /**
@@ -187,9 +185,8 @@ function getParallelipidedDiagonal(a, b, c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-  const d = Math.pow(10, pow);
+  const d = 10 ** pow;
   return Math.round(num / d) * d;
-
 }
 
 /**
@@ -212,7 +209,7 @@ function roundToPowerOfTen(num, pow) {
 function isPrime(n) {
   for (let i = 2; i <= Math.sqrt(n); i++) {
     if (n % i === 0) {
-      return false
+      return false;
     }
   }
 
@@ -237,10 +234,10 @@ function isPrime(n) {
 function toNumber(value, def) {
   let result;
   if (typeof value === 'string') {
-    if (isNaN(Number(value))) {
+    if (Number.isNaN(Number(value))) {
       result = def;
     } else {
-      result = parseInt(value);
+      result = parseInt(value, 10);
     }
   } else if (value === undefined || value == null) {
     result = def;

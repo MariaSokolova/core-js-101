@@ -32,7 +32,7 @@
  * @return {RegExp}
  */
 function getRegexForGuid() {
- return  /{[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}}/;
+  return /{[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}}/;
 }
 
 
@@ -78,9 +78,8 @@ function getRegexForPitSpot() {
  *   'PASSW0RD'.match(validator)  => false
  *   'Pa55'.match(validator) => false
  */
-function getPasswordValidator( minLength ) {
-  return  new RegExp(`^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z])[A-Za-z0-9]{${minLength},}$`);
-
+function getPasswordValidator(minLength) {
+  return new RegExp(`^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z])[A-Za-z0-9]{${minLength},}$`);
 }
 
 

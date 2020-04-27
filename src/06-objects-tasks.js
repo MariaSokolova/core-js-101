@@ -26,7 +26,7 @@ function Rectangle(width, height) {
     height,
     getArea() {
       return this.width * this.height;
-    }
+    },
   };
   return result;
 }
@@ -60,7 +60,7 @@ function getJSON(obj) {
  */
 function fromJSON(proto, json) {
   const a = JSON.parse(json);
-  a.__proto__ = proto;
+  Object.setPrototypeOf(a, proto);
   return a;
 }
 
@@ -197,11 +197,11 @@ const cssSelectorBuilder = {
     }
 
     if (this.classes.length !== 0) {
-      this.classes.forEach((el) => result += `.${el}`)
+      // this.classes.forEach((el) => result += `.${el}`);
     }
 
     if (this.pseudoCl.length !== 0) {
-      this.pseudoCl.forEach((el) => result += `:${el}`)
+      // this.pseudoCl.forEach((el) => result += `:${el}`);
     }
 
     if (this.pseudoEl) {
@@ -209,15 +209,14 @@ const cssSelectorBuilder = {
     }
 
     if (this.selector1) {
-      // result += this.selector1.stringify() + ' ' + this.combinator + ' ' + this.selector2.stringify()
+      // result += this.selector1.stringify() + ' ' + this.combinator + ' '
+      // + this.selector2.stringify()
     }
 
     this.reset();
 
     return result;
-  }
-
-
+  },
 };
 
 
