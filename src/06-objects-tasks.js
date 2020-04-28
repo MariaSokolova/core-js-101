@@ -131,33 +131,39 @@ const cssSelectorBuilder = {
   selector1: undefined,
 
   element(value) {
-    this.tag = value;
-    return this;
+    const self = { ...this };
+    self.tag = value;
+    return self;
   },
 
   id(value) {
-    this.idAttribute = value;
-    return this;
+    const self = { ...this };
+    self.idAttribute = value;
+    return self;
   },
 
   class(value) {
-    this.classes.push(value);
-    return this;
+    const self = { ...this };
+    self.classes.push(value);
+    return self;
   },
 
   attr(value) {
-    this.href = value;
-    return this;
+    const self = { ...this };
+    self.href = value;
+    return self;
   },
 
   pseudoClass(value) {
-    this.pseudoCl.push(value);
-    return this;
+    const self = { ...this };
+    self.pseudoCl.push(value);
+    return self;
   },
 
   pseudoElement(value) {
-    this.pseudoEl = value;
-    return this;
+    const self = { ...this };
+    self.pseudoEl = value;
+    return self;
   },
 
   combine(selector1, combinator, selector2) {
@@ -210,7 +216,7 @@ const cssSelectorBuilder = {
 
     if (this.selector1) {
       // result += this.selector1.stringify() + ' ' + this.combinator + ' '
-      // + this.selector2.stringify()
+      //   + this.selector2.stringify()
     }
 
     this.reset();
