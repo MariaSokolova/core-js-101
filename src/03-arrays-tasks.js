@@ -36,13 +36,9 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-  const arr = [];
-  for (let i = 1; i < (len * 2); i += 1) {
-    if (i % 2 !== 0) {
-      arr.push(i);
-    }
-  }
-  return arr;
+  return new Array(len)
+    .fill(1)
+    .map((el, index) => index * 2 + 1);
 }
 
 
@@ -90,13 +86,7 @@ function getArrayOfPositives(arr) {
  *    [ 'cat, 'dog', 'raccoon' ] => [ 'cat', 'dog', 'raccoon' ]
  */
 function getArrayOfStrings(arr) {
-  const newArr = [];
-  for (let i = 0; i < arr.length; i += 1) {
-    if (typeof arr[i] === 'string') {
-      newArr.push(arr[i]);
-    }
-  }
-  return newArr;
+  return arr.filter((el) => typeof el === 'string');
 }
 
 /**
@@ -113,19 +103,6 @@ function getArrayOfStrings(arr) {
  *    [ false, 0, NaN, '', undefined ]   => [ ]
  */
 function removeFalsyValues(arr) {
-  // let newArr = [];
-  // for (let i = 0; i < arr.length; i += 1) {
-  //   if (typeof arr[i] === 'number' && arr[i] > 0) {
-  //     newArr.push(arr[i]);
-  //   } else if (typeof arr[i] === 'string' && arr[i].length > 0) {
-  //     newArr.push(arr[i]);
-  //   } else if (arr[i] === true) {
-  //     newArr.push(arr[i]);
-  //   } else {
-  //
-  //     continue;
-  //   }
-  // }
   return arr.filter((el) => !!el);
 }
 
@@ -259,11 +236,11 @@ function toArrayOfSquares(arr) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
 function getMovingSum(arr) {
-  const newArr = [arr[0]];
-  for (let i = 1; i < arr.length; i += 1) {
-    newArr.push(arr[i] + newArr[i - 1]);
-  }
-  return newArr;
+  return arr.reduce((acc, el) => {
+    const lastAcc = acc[acc.length - 1] || 0;
+    acc.push(lastAcc + el);
+    return acc;
+  }, []);
 }
 
 /**
@@ -303,13 +280,7 @@ function propagateItemsByPositionIndex(arr) {
   if (arr === []) {
     return [];
   }
-  const newArr = [];
-  for (let i = 0; i < arr.length; i += 1) {
-    for (let j = 0; j <= i; j += 1) {
-      newArr.push(arr[i]);
-    }
-  }
-  return newArr;
+  return arr.flatMap((el, index) => new Array(index + 1).fill(el));
 }
 
 
@@ -371,7 +342,6 @@ function getPositivesCount(arr) {
  */
 function sortDigitNamesByNumericOrder(arr) {
   const sortArr = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
-
   return arr.sort((a, b) => sortArr.indexOf(a) - sortArr.indexOf(b));
 }
 
@@ -498,20 +468,12 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]
  */
 function getIdentityMatrix(n) {
-  const result = [];
-  for (let i = 0; i < n; i += 1) {
-    result[i] = [];
-    for (let j = 0; j < n; j += 1) {
-      // if (i === j) {
-      //   result[i].push(1);
-      // } else {
-      //   result[i].push(0);
-      // }
-      const el = i === j ? 1 : 0;
-      result[i].push(el);
-    }
-  }
-
+  let result = new Array(n).fill(0);
+  result = result.map(() => new Array(n).fill(0));
+  result = result.map((el, index) => {
+    el[index] = 1; // eslint-disable-line no-param-reassign
+    return el;
+  });
   return result;
 }
 
@@ -529,11 +491,9 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-  const arr = [];
-  for (let i = start; i <= end; i += 1) {
-    arr.push(i);
-  }
-  return arr;
+  return new Array(end - start + 1)
+    .fill(0)
+    .map((el, index) => start + index);
 }
 
 /**
@@ -583,15 +543,15 @@ function distinct(arr) {
  */
 function group(array, keySelector, valueSelector) {
   const map = new Map();
-  array.forEach((el) => {
+  array.map((el) => {
     const key = keySelector(el);
     if (map.has(key)) {
       map.get(key).push(valueSelector(el));
     } else {
       map.set(key, [valueSelector(el)]);
     }
+    return key;
   });
-
   return map;
 }
 
@@ -658,12 +618,10 @@ function swapHeadAndTail(ar) {
   const arr = [...ar];
   const n = Math.floor(arr.length / 2);
   const delta = arr.length % 2;
-  for (let i = 0; i < n; i += 1) {
-    const temp = arr[i];
-    arr[i] = arr[i + n + delta];
-    arr[i + n + delta] = temp;
-  }
-  return arr;
+  const head = arr.slice(0, n);
+  const tail = arr.slice(n + delta, arr.length);
+  const center = delta === 0 ? [] : [arr[n]];
+  return [...tail, ...center, ...head];
 }
 
 
